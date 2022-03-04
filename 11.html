@@ -1,0 +1,94 @@
+config.php
+
+<?php
+$mysql_host="localhost";
+$mysql_user="root";
+$mysql_password="";
+$conn=mysqli_connect($mysql_host,$mysql_user,$mysql_password);
+if(mysqli_select_db($conn,'simple'))
+{echo 'connected';}
+else{echo 'falied';}
+?>
+ 
+reg.php
+ 
+<?php
+include "config.php";
+if(isset($_POST['submit']))
+{
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+ 
+$sql = "INSERT INTO `local` ( `name`, `email`, `password`) VALUES ( '$name', '$email', '$password')";
+$result=$conn->query($sql);
+if($result==TRUE)
+{
+    echo "new record created successfully";
+}
+else
+{
+    echo "Error".$sql."<br>".$conn->error;
+}
+$conn->close();
+}
+?>
+<html>
+<body>
+<h2> Signup Form </h2>
+<form action="" method="POST">
+<fieldset>
+<legend> Personal Information </legend>
+First Name:<br>
+<input type="text" name="name">
+<br>
+Email:
+<br>
+<input type="email" name="email">
+<br>
+Password:<br>
+<input type="password" name="password">
+<br><br>
+<input type="submit" name="submit" value="submit">
+</fieldset>
+</body>
+</html>
+ 
+view.php
+ 
+<?php
+include "config.php";
+$sql = " SELECT * FROM `local` " ;
+$result=$conn->query($sql);
+?>
+<html>
+<head>
+<title>view page</title>
+</head>
+<body>
+<div class="container">
+<h2>VIEW</h2>
+<table border="1">
+<tr>
+<th>sino</th>
+<th>Name</th>
+<th>Email</th>
+<th>Password</th>
+</tr>
+<?php
+if($result->num_rows>0)
+{
+ while($row=$result->fetch_assoc())
+    {
+?>
+<tr>
+<td><?php echo $row['sino'];?></td>
+<td><?php echo $row['name'];?></td>
+<td><?php echo $row['email'];?></td>
+<td><?php echo $row['password'];?></td>
+<?php
+    }
+}
+?>
+</table>
+</html>

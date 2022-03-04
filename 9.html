@@ -1,0 +1,22 @@
+<html >
+<body>
+<div class="a" id="a">
+<img src="a.jpeg" id="image"><br><br>
+<h1 id="text1">hiii.....</h1>
+<h1 id="text2">hello....</h1>
+</div>
+<script>
+document.getElementById("a").addEventListener("mouseover",ab);
+document.getElementById("a").addEventListener("mouseout",bc);
+function ab() {
+document.getElementById('image').src = "b.jpeg";
+document.getElementById('text1').style.display="none";
+document.getElementById('text2').style.display="block"
+}
+function bc() {
+document.getElementById('image').src = "a.jpeg";
+document.getElementById('text1').style.display="block";
+document.getElementById('text2').style.display="none";
+}
+</script>
+</body></html>
